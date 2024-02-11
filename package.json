@@ -1,0 +1,48 @@
+{
+  "name": "vanilla-drawers",
+  "version": "1.0.2",
+  "description": "Drawers controller.",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/drawers.umd.js",
+  "module": "./dist/drawers.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/drawers.js",
+      "require": "./dist/drawers.umd.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techno-trump/drawers.git"
+  },
+  "keywords": [
+    "drawer",
+    "popup",
+    "modal",
+    "dialog"
+  ],
+  "author": "Anton Kalinichenko",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/techno-trump/drawers/issues"
+  },
+  "homepage": "https://github.com/techno-trump/drawers#readme",
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/plugin-transform-class-properties": "^7.23.3",
+    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-typescript": "^7.23.3",
+    "deepmerge": "^4.3.1",
+    "eslint": "^8.56.0",
+    "eventemitter3": "^5.0.1",
+    "is-plain-object": "^5.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  }
+}

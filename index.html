@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="module" src="/src/index.ts"></script>
+	<script type="module" src="/src/demo.ts"></script>
+	<title>Demo</title>
+	<style>
+		section {
+			padding: 20px;
+			max-width: 1200px;
+			margin: auto;
+			border: 1px solid black;
+		}
+		.full-height {
+			min-height: 40vh;
+		}
+		.short {
+			min-height: 20vh;
+		}
+	</style>
+</head>
+<body>
+	<div class="triggers">
+		<button type="button" data-drawer-open="example-1">Open example-1</button>
+		<button type="button" data-drawer-open="example-2">Open example-2</button>
+		<button type="button" data-drawer-open="example-3">Open example-3</button>
+	</div>
+	<div class="drawers-group" data-drawers-group="system">
+		<div class="drawer" data-drawer="example-1">
+			<div class="drawer__panel" data-elem="drawer.panel">
+				<div class="drawer__body">
+					<div class="drawer__inner">
+						<button type="button" data-drawer-close="example-1">Close example-1</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="drawer" data-drawer="example-2">
+			<div class="drawer__panel" data-elem="drawer.panel">
+				<div class="drawer__body">
+					<div class="drawer__inner">
+						<button type="button" data-drawer-close="example-2">Close example-2</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="drawer" data-drawer="example-3">
+			<div class="drawer__panel" data-elem="drawer.panel">
+				<div class="drawer__body">
+					<div class="drawer__inner">
+						<button type="button" data-drawer-close="example-3">Close example-3</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
