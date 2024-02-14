@@ -8,5 +8,8 @@ function init(_) {
 		onCloseConfirm: (drawer: Drawer, trigger: HTMLElement) => confirm("Are you sure?"),
 		modal: false
 	})
+	document.querySelector("#custom-trigger")?.addEventListener("click", () => {
+		window.app.drawers.open("example-3");
+	});
 }
 

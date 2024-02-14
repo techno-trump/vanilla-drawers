@@ -140,7 +140,7 @@ export class Drawer extends EventEmmiter {
 	}
 	// Methods
 	async open(trigger?: Element) {
-		delay(1);
+		await delay(0);
 		if (this.#open) return;
 		this.emit("beforeOpen", { drawer: this, trigger });
 		this.#open = true;
