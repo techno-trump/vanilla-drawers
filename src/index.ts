@@ -140,6 +140,7 @@ export class Drawer extends EventEmmiter {
 	}
 	// Methods
 	async open(trigger?: Element) {
+		delay(1);
 		if (this.#open) return;
 		this.emit("beforeOpen", { drawer: this, trigger });
 		this.#open = true;
@@ -186,7 +187,6 @@ export class Drawer extends EventEmmiter {
 		if (this.#vars.closeOnEsc && event.key === "Escape") this.close();
 	}
 	handleOutsideClick(event: MouseEvent) {
-			console.log(this, "handleOutsideClick");
 		// if (event.target === this.initiator) return;
 		// Нужно подумать еще, как обработать двойной вызов закрытия,
 		// В случае когда внешний клик был сделан по тригеру, т.е. тригер инициирует закрытие
