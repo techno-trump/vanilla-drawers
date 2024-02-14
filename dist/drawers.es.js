@@ -336,7 +336,7 @@ class _e extends oe {
   }
   // Methods
   async open(e) {
-    H(1), !n(this, x) && (this.emit("beforeOpen", { drawer: this, trigger: e }), m(this, x, !0), n(this, O).root.classList.add(n(this, p).openClass), this.emit("open", { drawer: this, trigger: e }), typeof n(this, p).openAnimationDuration == "number" && H(n(this, p).openAnimationDuration), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
+    await H(0), !n(this, x) && (this.emit("beforeOpen", { drawer: this, trigger: e }), m(this, x, !0), n(this, O).root.classList.add(n(this, p).openClass), this.emit("open", { drawer: this, trigger: e }), typeof n(this, p).openAnimationDuration == "number" && H(n(this, p).openAnimationDuration), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
   }
   async close(e) {
     n(this, p).onCloseConfirm && !n(this, p).onCloseConfirm(this, e) || (this.emit("beforeClose", { drawer: this, trigger: e }), this.removeEventListeners(), m(this, x, !1), n(this, O).root.classList.remove(n(this, p).openClass), this.emit("close", { drawer: this, trigger: e }), typeof n(this, p).closeAnimationDuration == "number" && H(n(this, p).closeAnimationDuration), this.emit("closeAnimationEnd", { drawer: this, trigger: e }));
