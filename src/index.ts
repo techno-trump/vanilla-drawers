@@ -333,7 +333,9 @@ export default class DrawersComposite {
 		if (alias) {
 			this.get(alias)?.on(type, callback);
 		} else {
-			Object.keys(this.#drawersIndex).forEach(alias => this.get(alias)?.on(type, callback));
+			for (const [alias, drawer] of this.#drawersIndex) {
+				drawer.on(type, callback);
+			}
 		}
 	}
 }

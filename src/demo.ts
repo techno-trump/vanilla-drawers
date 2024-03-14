@@ -11,5 +11,10 @@ function init(_) {
 	document.querySelector("#custom-trigger")?.addEventListener("click", () => {
 		window.app.drawers.open("example-3");
 	});
+
+	window.app.drawers.on(null, "open", ({ drawer }) => {
+		console.log(drawer);
+		drawer.dom.root.classList.add("transition");
+	});
 }
 
