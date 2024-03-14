@@ -102,13 +102,13 @@ export class Drawer extends EventEmmiter {
 		const nextOptions = mergeOptions(options ? [defaultOptions, options] : [defaultOptions]);
 		const root = getTargetElem(target) as HTMLElement;
 		if (root === null) throw new Error("Drawer's root cannot be found");
+		this.#alias = root.getAttribute("data-drawer")!;
 		const panel = root.querySelector(PANEL_SELECTOR) as HTMLElement;
-		if (panel === null) throw new Error("Drawer's panel cannot be found");
+		if (panel === null) throw new Error(`Drawer's panel cannot be found. Alias: ${this.#alias}`);
 		this.#dom = {
 			root,
 			panel,
 		};
-		this.#alias = root.getAttribute("data-drawer")!;
 		this.setOptions(nextOptions);
 		this.#dom.panel.setAttribute("tabindex", "-1");
 		this.#dom.root.classList.add("drawer_initialized");
