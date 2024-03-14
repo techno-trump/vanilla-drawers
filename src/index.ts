@@ -93,7 +93,7 @@ export class Trigger {
 export class Drawer extends EventEmmiter {
 	#vars: TDrawerOptions;
 	#zIndex: number;
-	#dom: TDrawerDom;
+	dom: TDrawerDom;
 	#open: boolean;
 	#group: DrawersGroup;
 	#alias: string;
@@ -105,20 +105,20 @@ export class Drawer extends EventEmmiter {
 		this.#alias = root.getAttribute("data-drawer")!;
 		const panel = root.querySelector(PANEL_SELECTOR) as HTMLElement;
 		if (panel === null) throw new Error(`Drawer's panel cannot be found. Alias: ${this.#alias}`);
-		this.#dom = {
+		this.dom = {
 			root,
 			panel,
 		};
 		this.setOptions(nextOptions);
-		this.#dom.panel.setAttribute("tabindex", "-1");
-		this.#dom.root.classList.add("drawer_initialized");
+		this.dom.panel.setAttribute("tabindex", "-1");
+		this.dom.root.classList.add("drawer_initialized");
 	}
 	addEventListeners() {
-		this.#dom.root.addEventListener("keydown", this.handleKeydown);
+		this.dom.root.addEventListener("keydown", this.handleKeydown);
 		document.addEventListener("click", this.handleDocumentClick);
 	}
 	removeEventListeners() {
-		this.#dom.root.removeEventListener("keydown", this.handleKeydown);
+		this.dom.root.removeEventListener("keydown", this.handleKeydown);
 		document.removeEventListener("click", this.handleDocumentClick);
 	}
 	// Accessors
@@ -129,10 +129,10 @@ export class Drawer extends EventEmmiter {
 		return this.#vars.modal;
 	}
 	set isModal(next) {
-		this.#dom.root.classList[next ? "add" : "remove" ]("drawer_modal");
+		this.dom.root.classList[next ? "add" : "remove" ]("drawer_modal");
 	}
 	set zIndex(next) {
-		this.#dom.root.style.setProperty("--z-index", String(next));
+		this.dom.root.style.setProperty("--z-index", String(next));
 		this.#zIndex = next;
 	}
 	get zIndex() {
@@ -144,7 +144,7 @@ export class Drawer extends EventEmmiter {
 		if (this.#open) return;
 		this.emit("beforeOpen", { drawer: this, trigger });
 		this.#open = true;
-		this.#dom.root.classList.add(this.#vars.openClass);
+		this.dom.root.classList.add(this.#vars.openClass);
 		this.emit("open", { drawer: this, trigger });
 		if (typeof this.#vars.openAnimationDuration === "number") delay(this.#vars.openAnimationDuration);
 		this.emit("openAnimationEnd", { drawer: this, trigger });
@@ -156,7 +156,7 @@ export class Drawer extends EventEmmiter {
 		this.emit("beforeClose", { drawer: this, trigger });
 		this.removeEventListeners();
 		this.#open = false;
-		this.#dom.root.classList.remove(this.#vars.openClass);
+		this.dom.root.classList.remove(this.#vars.openClass);
 		this.emit("close", { drawer: this, trigger });
 		if (typeof this.#vars.closeAnimationDuration === "number") delay(this.#vars.closeAnimationDuration);
 		this.emit("closeAnimationEnd", { drawer: this, trigger });
@@ -167,7 +167,7 @@ export class Drawer extends EventEmmiter {
 		const target = event.target as HTMLElement;
 		const composed = event.composedPath();
 		// Клик был внутри тела дровера
-		if (this.#dom.panel.contains(target)) return;
+		if (this.dom.panel.contains(target)) return;
 		const root = target?.closest("[data-drawer]");
 		if (root) { // Underlay click
 			const alias = root.getAttribute("data-drawer");
@@ -206,10 +206,10 @@ export class Drawer extends EventEmmiter {
 		this.focusSelf();
 	}
 	focusSelf() {
-		this.#dom.panel.focus();
+		this.dom.panel.focus();
 	}
 	focusChild() {
-		const focusableChild = this.#dom.panel.querySelector(FOCUSABLE_ELEMENTS.join(",")) as HTMLElement;
+		const focusableChild = this.dom.panel.querySelector(FOCUSABLE_ELEMENTS.join(",")) as HTMLElement;
 		if (!focusableChild) return false;
 		return focusableChild.focus(), true;
 	}
