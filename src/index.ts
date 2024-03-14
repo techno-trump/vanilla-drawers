@@ -234,7 +234,7 @@ export class DrawersGroup {
 		const root = getTargetElem(target) as HTMLElement;
 		if (root === null) throw new Error("Drawer's group root cannot be found");
 		this.#root = root;
-		const scrollContainer = this.#root.closest(`[data-scrollable], html`) as HTMLElement;
+		const scrollContainer = this.#root.closest(`[data-scrollable], html`) as HTMLElement || this.#root.matches(`[data-scrollable], html`) && this.#root;
 		if (scrollContainer === null) throw new Error("Scrollable container for group root cannot be found");
 		this.#scrollContainer = scrollContainer;
 	}
@@ -293,6 +293,7 @@ export default class DrawersComposite {
 			if (typeof groupAlias !== "string") return;
 			this.#groupsIndex.set(groupAlias, new DrawersGroup(groupElem));
 		});
+		this.#groupsIndex.set("default", new DrawersGroup(document.documentElement));
 		const drawerElems = document.querySelectorAll(`[data-drawer]`);
 		drawerElems.forEach(drawerElem => {
 			const drawerAlias = drawerElem.getAttribute("data-drawer");
@@ -301,7 +302,7 @@ export default class DrawersComposite {
 			this.#drawersIndex.set(drawerAlias, drawer);
 
 			const groupElem = drawerElem.closest(`[${GROUP_ATTR}]`);
-			const groupAlias = groupElem?.getAttribute(GROUP_ATTR);
+			const groupAlias = groupElem ? groupElem.getAttribute(GROUP_ATTR) : "default";
 			if (typeof groupAlias !== "string") throw new Error("Group doesn't have alias set correctly");
 			this.#groupsIndex.get(groupAlias)?.add(drawer);
 		});
