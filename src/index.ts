@@ -329,6 +329,13 @@ export default class DrawersComposite {
 	get(alias?: string | null) {
 		return typeof alias === "string" && this.#drawersIndex.get(alias) || null;
 	}
+	on(alias: string, type: string, callback: () => void) {
+		if (alias) {
+			this.get(alias)?.on(type, callback);
+		} else {
+			Object.keys(this.#drawersIndex).forEach(alias => this.get(alias)?.on(type, callback));
+		}
+	}
 }
 
 if (typeof window !== 'undefined') {
