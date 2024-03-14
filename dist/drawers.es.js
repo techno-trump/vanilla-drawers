@@ -22,8 +22,8 @@ var ne = { exports: {} };
   function f(h, i, o, c, O) {
     if (typeof o != "function")
       throw new TypeError("The listener must be a function");
-    var g = new s(o, c || h, O), m = e ? e + i : i;
-    return h._events[m] ? h._events[m].fn ? h._events[m] = [h._events[m], g] : h._events[m].push(g) : (h._events[m] = g, h._eventsCount++), h;
+    var g = new s(o, c || h, O), w = e ? e + i : i;
+    return h._events[w] ? h._events[w].fn ? h._events[w] = [h._events[w], g] : h._events[w].push(g) : (h._events[w] = g, h._eventsCount++), h;
   }
   function d(h, i) {
     --h._eventsCount === 0 ? h._events = new a() : delete h._events[i];
@@ -44,17 +44,17 @@ var ne = { exports: {} };
       return [];
     if (c.fn)
       return [c.fn];
-    for (var O = 0, g = c.length, m = new Array(g); O < g; O++)
-      m[O] = c[O].fn;
-    return m;
+    for (var O = 0, g = c.length, w = new Array(g); O < g; O++)
+      w[O] = c[O].fn;
+    return w;
   }, u.prototype.listenerCount = function(i) {
     var o = e ? e + i : i, c = this._events[o];
     return c ? c.fn ? 1 : c.length : 0;
-  }, u.prototype.emit = function(i, o, c, O, g, m) {
+  }, u.prototype.emit = function(i, o, c, O, g, w) {
     var _ = e ? e + i : i;
     if (!this._events[_])
       return !1;
-    var l = this._events[_], j = arguments.length, M, w;
+    var l = this._events[_], j = arguments.length, M, m;
     if (l.fn) {
       switch (l.once && this.removeListener(i, l.fn, void 0, !0), j) {
         case 1:
@@ -68,32 +68,32 @@ var ne = { exports: {} };
         case 5:
           return l.fn.call(l.context, o, c, O, g), !0;
         case 6:
-          return l.fn.call(l.context, o, c, O, g, m), !0;
+          return l.fn.call(l.context, o, c, O, g, w), !0;
       }
-      for (w = 1, M = new Array(j - 1); w < j; w++)
-        M[w - 1] = arguments[w];
+      for (m = 1, M = new Array(j - 1); m < j; m++)
+        M[m - 1] = arguments[m];
       l.fn.apply(l.context, M);
     } else {
       var se = l.length, N;
-      for (w = 0; w < se; w++)
-        switch (l[w].once && this.removeListener(i, l[w].fn, void 0, !0), j) {
+      for (m = 0; m < se; m++)
+        switch (l[m].once && this.removeListener(i, l[m].fn, void 0, !0), j) {
           case 1:
-            l[w].fn.call(l[w].context);
+            l[m].fn.call(l[m].context);
             break;
           case 2:
-            l[w].fn.call(l[w].context, o);
+            l[m].fn.call(l[m].context, o);
             break;
           case 3:
-            l[w].fn.call(l[w].context, o, c);
+            l[m].fn.call(l[m].context, o, c);
             break;
           case 4:
-            l[w].fn.call(l[w].context, o, c, O);
+            l[m].fn.call(l[m].context, o, c, O);
             break;
           default:
             if (!M)
               for (N = 1, M = new Array(j - 1); N < j; N++)
                 M[N - 1] = arguments[N];
-            l[w].fn.apply(l[w].context, M);
+            l[m].fn.apply(l[m].context, M);
         }
     }
     return !0;
@@ -107,12 +107,12 @@ var ne = { exports: {} };
       return this;
     if (!o)
       return d(this, g), this;
-    var m = this._events[g];
-    if (m.fn)
-      m.fn === o && (!O || m.once) && (!c || m.context === c) && d(this, g);
+    var w = this._events[g];
+    if (w.fn)
+      w.fn === o && (!O || w.once) && (!c || w.context === c) && d(this, g);
     else {
-      for (var _ = 0, l = [], j = m.length; _ < j; _++)
-        (m[_].fn !== o || O && !m[_].once || c && m[_].context !== c) && l.push(m[_]);
+      for (var _ = 0, l = [], j = w.length; _ < j; _++)
+        (w[_].fn !== o || O && !w[_].once || c && w[_].context !== c) && l.push(w[_]);
       l.length ? this._events[g] = l.length === 1 ? l[0] : l : d(this, g);
     }
     return this;
@@ -148,19 +148,19 @@ function pe(n, t, e) {
     return R(a, e);
   });
 }
-function me(n, t) {
+function we(n, t) {
   if (!t.customMerge)
     return U;
   var e = t.customMerge(n);
   return typeof e == "function" ? e : U;
 }
-function we(n) {
+function me(n) {
   return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(n).filter(function(t) {
     return Object.propertyIsEnumerable.call(n, t);
   }) : [];
 }
 function Q(n) {
-  return Object.keys(n).concat(we(n));
+  return Object.keys(n).concat(me(n));
 }
 function re(n, t) {
   try {
@@ -177,7 +177,7 @@ function be(n, t, e) {
   return e.isMergeableObject(n) && Q(n).forEach(function(s) {
     a[s] = R(n[s], e);
   }), Q(t).forEach(function(s) {
-    ye(n, s) || (re(n, s) && e.isMergeableObject(t[s]) ? a[s] = me(s, e)(n[s], t[s], e) : a[s] = R(t[s], e));
+    ye(n, s) || (re(n, s) && e.isMergeableObject(t[s]) ? a[s] = we(s, e)(n[s], t[s], e) : a[s] = R(t[s], e));
   }), a;
 }
 function U(n, t, e) {
@@ -336,10 +336,10 @@ class _e extends oe {
   }
   // Methods
   async open(e) {
-    await F(0), !r(this, k) && (this.emit("beforeOpen", { drawer: this, trigger: e }), b(this, k, !0), this.dom.root.classList.add(r(this, p).openClass), this.emit("open", { drawer: this, trigger: e }), typeof r(this, p).openAnimationDuration == "number" && F(r(this, p).openAnimationDuration), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
+    await F(0), !r(this, k) && (this.emit("beforeOpen", { drawer: this, trigger: e }), b(this, k, !0), this.dom.root.classList.add(r(this, p).openClass), this.emit("open", { drawer: this, trigger: e }), typeof r(this, p).openAnimationDuration == "number" && await F(r(this, p).openAnimationDuration), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
   }
   async close(e) {
-    r(this, p).onCloseConfirm && !r(this, p).onCloseConfirm(this, e) || (this.emit("beforeClose", { drawer: this, trigger: e }), this.removeEventListeners(), b(this, k, !1), this.dom.root.classList.remove(r(this, p).openClass), this.emit("close", { drawer: this, trigger: e }), typeof r(this, p).closeAnimationDuration == "number" && F(r(this, p).closeAnimationDuration), this.emit("closeAnimationEnd", { drawer: this, trigger: e }));
+    r(this, p).onCloseConfirm && !r(this, p).onCloseConfirm(this, e) || (this.emit("beforeClose", { drawer: this, trigger: e }), this.removeEventListeners(), b(this, k, !1), this.dom.root.classList.remove(r(this, p).openClass), this.emit("close", { drawer: this, trigger: e }), typeof r(this, p).closeAnimationDuration == "number" && await F(r(this, p).closeAnimationDuration), this.emit("closeAnimationEnd", { drawer: this, trigger: e }));
   }
   handleOtherDrawerClick(e) {
   }
@@ -455,10 +455,11 @@ const q = class q {
   }
   on(t, e, a) {
     var s;
-    t ? (s = this.get(t)) == null || s.on(e, a) : Object.keys(r(this, I)).forEach((f) => {
-      var d;
-      return (d = this.get(f)) == null ? void 0 : d.on(e, a);
-    });
+    if (t)
+      (s = this.get(t)) == null || s.on(e, a);
+    else
+      for (const [f, d] of r(this, I))
+        d.on(e, a);
   }
 };
 I = new WeakMap(), z = new WeakMap();

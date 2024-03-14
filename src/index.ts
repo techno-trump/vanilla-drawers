@@ -146,7 +146,7 @@ export class Drawer extends EventEmmiter {
 		this.#open = true;
 		this.dom.root.classList.add(this.#vars.openClass);
 		this.emit("open", { drawer: this, trigger });
-		if (typeof this.#vars.openAnimationDuration === "number") delay(this.#vars.openAnimationDuration);
+		if (typeof this.#vars.openAnimationDuration === "number") await delay(this.#vars.openAnimationDuration);
 		this.emit("openAnimationEnd", { drawer: this, trigger });
 		this.focus();
 		this.addEventListeners();
@@ -158,7 +158,7 @@ export class Drawer extends EventEmmiter {
 		this.#open = false;
 		this.dom.root.classList.remove(this.#vars.openClass);
 		this.emit("close", { drawer: this, trigger });
-		if (typeof this.#vars.closeAnimationDuration === "number") delay(this.#vars.closeAnimationDuration);
+		if (typeof this.#vars.closeAnimationDuration === "number") await delay(this.#vars.closeAnimationDuration);
 		this.emit("closeAnimationEnd", { drawer: this, trigger });
 	}
 	handleDocumentClick = async (event: MouseEvent) => {
