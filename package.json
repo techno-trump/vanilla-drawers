@@ -1,6 +1,6 @@
 {
   "name": "vanilla-drawers",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Drawers controller.",
   "files": [
     "dist"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/techno-trump/drawers.git"
+    "url": "git+https://github.com/techno-trump/vanilla-drawers.git"
   },
   "keywords": [
     "drawer",
@@ -30,9 +30,9 @@
   "author": "Anton Kalinichenko",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/techno-trump/drawers/issues"
+    "url": "https://github.com/techno-trump/vanilla-drawers/issues"
   },
-  "homepage": "https://github.com/techno-trump/drawers#readme",
+  "homepage": "https://github.com/techno-trump/vanilla-drawers#readme",
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/plugin-transform-class-properties": "^7.23.3",
