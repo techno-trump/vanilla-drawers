@@ -24,9 +24,12 @@
 
 # get started
 Подключаем через cdn, например так:
+```
 <script defer src="https://cdn.jsdelivr.net/npm/vanilla-drawers@1.0.11/dist/drawers.umd.js"></script>
+```
 
-Пример разметки (в исходниках есть demo):
+# Пример разметки (в исходниках есть demo):
+```
 <body>
 	<div class="triggers">
 		<button type="button" data-drawer-open="example-1">Open example-1</button>
@@ -56,8 +59,9 @@
 		</div>
 	</div>
 </body>
-
-Пример стилей (в исходниках есть demo):
+```
+# Пример стилей (в исходниках есть demo):
+```
 .drawers-group {
 	position: fixed;
 	left: 0;
@@ -99,3 +103,4 @@
 	opacity: 0;
 	transform: none;
 }
+```
