@@ -131,6 +131,9 @@ export class Drawer extends EventEmmiter {
 	set isModal(next) {
 		this.dom.root.classList[next ? "add" : "remove" ]("drawer_modal");
 	}
+	get willLockScroll() {
+		return this.#vars.lockPageScroll;
+	}
 	set zIndex(next) {
 		this.dom.root.style.setProperty("--z-index", String(next));
 		this.#zIndex = next;
@@ -260,7 +263,7 @@ export class DrawersGroup {
 				this.#openModals.forEach((drawer, idx) => drawer.zIndex = this.#openNonModals.length + idx + 1);
 			}
 		}
-		this.lockScroll(drawer);
+		if (drawer.willLockScroll) this.lockScroll(drawer);	
 	}
 	onCloseAnimationEnd = ({ drawer, trigger }) => {
 		const stack = drawer.isModal ? this.#openModals : this.#openNonModals;
