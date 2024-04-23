@@ -34,7 +34,11 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	pointer-events: none;
+}
+.drawer_modal {
 	background-color: rgba(78, 78, 78, 0.342);
+	pointer-events: all;
 }
 .drawer__panel {
 	display: flex;
@@ -44,6 +48,7 @@ body {
 	max-height: 400px;
 	margin: auto;
 	overflow-x: hidden;
+	pointer-events: all;
 }
 .drawer__panel {
 	transition: visibility 0.4s, opacity 0.4s, transform 0.4s;

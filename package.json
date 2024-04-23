@@ -1,6 +1,6 @@
 {
   "name": "vanilla-drawers",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Drawers controller.",
   "files": [
     "dist"

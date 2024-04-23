@@ -249,7 +249,6 @@ export class DrawersGroup {
 	#openModals: Drawer[] = [];
 	#openNonModals: Drawer[] = [];
 	#scrollContainer: HTMLElement;
-	#scrollLockHolders: Set<Drawer> = new Set();
 	#openDrawersIndex: Map<Drawer, number> = new Map();
 	constructor(target: TTarget) {
 		const root = getTargetElem(target) as HTMLElement;

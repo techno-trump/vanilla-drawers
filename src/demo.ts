@@ -9,6 +9,10 @@ function init(_) {
 		modal: false,
 		lockPageScroll: false,
 	})
+	window.app.drawers.get("example-5").setOptions({
+		modal: false,
+		closeOnOutsideClick: false,
+	})
 	document.querySelector("#custom-trigger")?.addEventListener("click", () => {
 		window.app.drawers.open("example-3");
 	});
@@ -18,4 +22,3 @@ function init(_) {
 		drawer.dom.root.classList.add("transition");
 	});
 }
-
