@@ -226,7 +226,25 @@ export class Drawer extends EventEmmiter {
 		this.#group = group;
 	}
 }
+class ScrollLock {
+	#holders: Map<HTMLElement, Set<Drawer>> = new Map();
+	constructor() {}
+	lock(container: HTMLElement, drawer: Drawer) {
+		if (!this.#holders.has(container)) {
+			this.#holders.set(container, new Set());
+		}
+		const holders = this.#holders.get(container)!;
+		if (holders.size === 0) container.classList.add("scroll-lock-by-drawer");
+		holders.add(drawer);
+	}
+	unlock(container: HTMLElement, drawer: Drawer) {
+		const holders = this.#holders.get(container);
+		holders?.delete(drawer);
+		if (!holders || holders.size === 0) container.classList.remove("scroll-lock-by-drawer");
+	}
+}
 export class DrawersGroup {
+	static scrollLock = new ScrollLock();
 	#root: HTMLElement;
 	#openModals: Drawer[] = [];
 	#openNonModals: Drawer[] = [];
@@ -273,12 +291,10 @@ export class DrawersGroup {
 		this.unlockScroll(drawer);
 	}
 	lockScroll(drawer: Drawer) {
-		if (this.#scrollLockHolders.size === 0) this.#scrollContainer.classList.add("scroll-lock-by-drawer");
-		this.#scrollLockHolders.add(drawer);
+		DrawersGroup.scrollLock.lock(this.#scrollContainer, drawer);
 	}
 	unlockScroll(drawer: Drawer) {
-		this.#scrollLockHolders.delete(drawer);
-		if (this.#scrollLockHolders.size === 0) this.#scrollContainer.classList.remove("scroll-lock-by-drawer");
+		DrawersGroup.scrollLock.unlock(this.#scrollContainer, drawer);
 	}
 }
 export default class DrawersComposite {
