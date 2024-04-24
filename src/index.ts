@@ -38,6 +38,8 @@ const defaultOptions: TDrawerOptions = {
 	onOpen: null,
 	onOpenAnimationEnd: null,
 	openClass: "drawer_open",
+	closingClass: "drawer_closing",
+	openingClass: "drawer_opening",
 	openAnimationDuration: 0,
 	closeAnimationDuration: 0,
 	lockPageScroll: true,
@@ -147,9 +149,11 @@ export class Drawer extends EventEmmiter {
 		if (this.#open) return;
 		this.emit("beforeOpen", { drawer: this, trigger });
 		this.#open = true;
-		this.dom.root.classList.add(this.#vars.openClass);
+		this.dom.root.classList.add(this.#vars.openingClass);
 		this.emit("open", { drawer: this, trigger });
 		if (typeof this.#vars.openAnimationDuration === "number") await delay(this.#vars.openAnimationDuration);
+		this.dom.root.classList.remove(this.#vars.openingClass);
+		this.dom.root.classList.add(this.#vars.openClass);
 		this.emit("openAnimationEnd", { drawer: this, trigger });
 		this.focus();
 		this.addEventListeners();
@@ -160,8 +164,10 @@ export class Drawer extends EventEmmiter {
 		this.removeEventListeners();
 		this.#open = false;
 		this.dom.root.classList.remove(this.#vars.openClass);
+		this.dom.root.classList.add(this.#vars.closingClass);
 		this.emit("close", { drawer: this, trigger });
 		if (typeof this.#vars.closeAnimationDuration === "number") await delay(this.#vars.closeAnimationDuration);
+		this.dom.root.classList.remove(this.#vars.closingClass);
 		this.emit("closeAnimationEnd", { drawer: this, trigger });
 	}
 	handleDocumentClick = async (event: MouseEvent) => {

@@ -17,6 +17,8 @@ export type TDrawerOptions = {
 	onOpen?: ((drawer: Drawer) => void) | null;
 	onOpenAnimationEnd?: ((drawer: Drawer) => void) | null;
 	openClass: string;
+	openingClass: string;
+	closingClass: string;
 	openAnimationDuration: number;
 	closeAnimationDuration: number;
 	lockPageScroll: boolean;

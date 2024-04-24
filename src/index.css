@@ -53,7 +53,7 @@ body {
 .drawer__panel {
 	transition: visibility 0.4s, opacity 0.4s, transform 0.4s;
 }
-.drawer:not(.drawer_open), .drawer:not(.drawer_open) .drawer__panel  {
+.drawer:not(.drawer_open, .drawer_opening), .drawer:not(.drawer_open, .drawer_opening) .drawer__panel  {
 	visibility: hidden;
 	opacity: 0;
 	transform: none;
