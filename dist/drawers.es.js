@@ -2,126 +2,126 @@ var W = (n, t, e) => {
   if (!t.has(n))
     throw TypeError("Cannot " + e);
 };
-var s = (n, t, e) => (W(n, t, "read from private field"), e ? e.call(n) : t.get(n)), g = (n, t, e) => {
+var r = (n, t, e) => (W(n, t, "read from private field"), e ? e.call(n) : t.get(n)), m = (n, t, e) => {
   if (t.has(n))
     throw TypeError("Cannot add the same private member more than once");
   t instanceof WeakSet ? t.add(n) : t.set(n, e);
-}, b = (n, t, e, o) => (W(n, t, "write to private field"), o ? o.call(n, e) : t.set(n, e), e);
+}, v = (n, t, e, a) => (W(n, t, "write to private field"), a ? a.call(n, e) : t.set(n, e), e);
 function ne(n) {
   return n && n.__esModule && Object.prototype.hasOwnProperty.call(n, "default") ? n.default : n;
 }
-var se = { exports: {} };
+var re = { exports: {} };
 (function(n) {
   var t = Object.prototype.hasOwnProperty, e = "~";
-  function o() {
+  function a() {
   }
-  Object.create && (o.prototype = /* @__PURE__ */ Object.create(null), new o().__proto__ || (e = !1));
-  function r(h, i, l) {
-    this.fn = h, this.context = i, this.once = l || !1;
+  Object.create && (a.prototype = /* @__PURE__ */ Object.create(null), new a().__proto__ || (e = !1));
+  function l(o, i, c) {
+    this.fn = o, this.context = i, this.once = c || !1;
   }
-  function f(h, i, l, c, v) {
-    if (typeof l != "function")
+  function g(o, i, c, h, b) {
+    if (typeof c != "function")
       throw new TypeError("The listener must be a function");
-    var y = new r(l, c || h, v), m = e ? e + i : i;
-    return h._events[m] ? h._events[m].fn ? h._events[m] = [h._events[m], y] : h._events[m].push(y) : (h._events[m] = y, h._eventsCount++), h;
+    var y = new l(c, h || o, b), d = e ? e + i : i;
+    return o._events[d] ? o._events[d].fn ? o._events[d] = [o._events[d], y] : o._events[d].push(y) : (o._events[d] = y, o._eventsCount++), o;
   }
-  function d(h, i) {
-    --h._eventsCount === 0 ? h._events = new o() : delete h._events[i];
+  function p(o, i) {
+    --o._eventsCount === 0 ? o._events = new a() : delete o._events[i];
   }
-  function u() {
-    this._events = new o(), this._eventsCount = 0;
+  function s() {
+    this._events = new a(), this._eventsCount = 0;
   }
-  u.prototype.eventNames = function() {
-    var i = [], l, c;
+  s.prototype.eventNames = function() {
+    var i = [], c, h;
     if (this._eventsCount === 0)
       return i;
-    for (c in l = this._events)
-      t.call(l, c) && i.push(e ? c.slice(1) : c);
-    return Object.getOwnPropertySymbols ? i.concat(Object.getOwnPropertySymbols(l)) : i;
-  }, u.prototype.listeners = function(i) {
-    var l = e ? e + i : i, c = this._events[l];
-    if (!c)
+    for (h in c = this._events)
+      t.call(c, h) && i.push(e ? h.slice(1) : h);
+    return Object.getOwnPropertySymbols ? i.concat(Object.getOwnPropertySymbols(c)) : i;
+  }, s.prototype.listeners = function(i) {
+    var c = e ? e + i : i, h = this._events[c];
+    if (!h)
       return [];
-    if (c.fn)
-      return [c.fn];
-    for (var v = 0, y = c.length, m = new Array(y); v < y; v++)
-      m[v] = c[v].fn;
-    return m;
-  }, u.prototype.listenerCount = function(i) {
-    var l = e ? e + i : i, c = this._events[l];
-    return c ? c.fn ? 1 : c.length : 0;
-  }, u.prototype.emit = function(i, l, c, v, y, m) {
+    if (h.fn)
+      return [h.fn];
+    for (var b = 0, y = h.length, d = new Array(y); b < y; b++)
+      d[b] = h[b].fn;
+    return d;
+  }, s.prototype.listenerCount = function(i) {
+    var c = e ? e + i : i, h = this._events[c];
+    return h ? h.fn ? 1 : h.length : 0;
+  }, s.prototype.emit = function(i, c, h, b, y, d) {
     var _ = e ? e + i : i;
     if (!this._events[_])
       return !1;
-    var a = this._events[_], L = arguments.length, S, w;
-    if (a.fn) {
-      switch (a.once && this.removeListener(i, a.fn, void 0, !0), L) {
+    var u = this._events[_], L = arguments.length, S, w;
+    if (u.fn) {
+      switch (u.once && this.removeListener(i, u.fn, void 0, !0), L) {
         case 1:
-          return a.fn.call(a.context), !0;
+          return u.fn.call(u.context), !0;
         case 2:
-          return a.fn.call(a.context, l), !0;
+          return u.fn.call(u.context, c), !0;
         case 3:
-          return a.fn.call(a.context, l, c), !0;
+          return u.fn.call(u.context, c, h), !0;
         case 4:
-          return a.fn.call(a.context, l, c, v), !0;
+          return u.fn.call(u.context, c, h, b), !0;
         case 5:
-          return a.fn.call(a.context, l, c, v, y), !0;
+          return u.fn.call(u.context, c, h, b, y), !0;
         case 6:
-          return a.fn.call(a.context, l, c, v, y, m), !0;
+          return u.fn.call(u.context, c, h, b, y, d), !0;
       }
       for (w = 1, S = new Array(L - 1); w < L; w++)
         S[w - 1] = arguments[w];
-      a.fn.apply(a.context, S);
+      u.fn.apply(u.context, S);
     } else {
-      var oe = a.length, N;
+      var oe = u.length, N;
       for (w = 0; w < oe; w++)
-        switch (a[w].once && this.removeListener(i, a[w].fn, void 0, !0), L) {
+        switch (u[w].once && this.removeListener(i, u[w].fn, void 0, !0), L) {
           case 1:
-            a[w].fn.call(a[w].context);
+            u[w].fn.call(u[w].context);
             break;
           case 2:
-            a[w].fn.call(a[w].context, l);
+            u[w].fn.call(u[w].context, c);
             break;
           case 3:
-            a[w].fn.call(a[w].context, l, c);
+            u[w].fn.call(u[w].context, c, h);
             break;
           case 4:
-            a[w].fn.call(a[w].context, l, c, v);
+            u[w].fn.call(u[w].context, c, h, b);
             break;
           default:
             if (!S)
               for (N = 1, S = new Array(L - 1); N < L; N++)
                 S[N - 1] = arguments[N];
-            a[w].fn.apply(a[w].context, S);
+            u[w].fn.apply(u[w].context, S);
         }
     }
     return !0;
-  }, u.prototype.on = function(i, l, c) {
-    return f(this, i, l, c, !1);
-  }, u.prototype.once = function(i, l, c) {
-    return f(this, i, l, c, !0);
-  }, u.prototype.removeListener = function(i, l, c, v) {
+  }, s.prototype.on = function(i, c, h) {
+    return g(this, i, c, h, !1);
+  }, s.prototype.once = function(i, c, h) {
+    return g(this, i, c, h, !0);
+  }, s.prototype.removeListener = function(i, c, h, b) {
     var y = e ? e + i : i;
     if (!this._events[y])
       return this;
-    if (!l)
-      return d(this, y), this;
-    var m = this._events[y];
-    if (m.fn)
-      m.fn === l && (!v || m.once) && (!c || m.context === c) && d(this, y);
+    if (!c)
+      return p(this, y), this;
+    var d = this._events[y];
+    if (d.fn)
+      d.fn === c && (!b || d.once) && (!h || d.context === h) && p(this, y);
     else {
-      for (var _ = 0, a = [], L = m.length; _ < L; _++)
-        (m[_].fn !== l || v && !m[_].once || c && m[_].context !== c) && a.push(m[_]);
-      a.length ? this._events[y] = a.length === 1 ? a[0] : a : d(this, y);
+      for (var _ = 0, u = [], L = d.length; _ < L; _++)
+        (d[_].fn !== c || b && !d[_].once || h && d[_].context !== h) && u.push(d[_]);
+      u.length ? this._events[y] = u.length === 1 ? u[0] : u : p(this, y);
     }
     return this;
-  }, u.prototype.removeAllListeners = function(i) {
-    var l;
-    return i ? (l = e ? e + i : i, this._events[l] && d(this, l)) : (this._events = new o(), this._eventsCount = 0), this;
-  }, u.prototype.off = u.prototype.removeListener, u.prototype.addListener = u.prototype.on, u.prefixed = e, u.EventEmitter = u, n.exports = u;
-})(se);
-var ie = se.exports;
+  }, s.prototype.removeAllListeners = function(i) {
+    var c;
+    return i ? (c = e ? e + i : i, this._events[c] && p(this, c)) : (this._events = new a(), this._eventsCount = 0), this;
+  }, s.prototype.off = s.prototype.removeListener, s.prototype.addListener = s.prototype.on, s.prefixed = e, s.EventEmitter = s, n.exports = s;
+})(re);
+var ie = re.exports;
 const le = /* @__PURE__ */ ne(ie);
 var ae = function(t) {
   return ce(t) && !he(t);
@@ -140,60 +140,60 @@ function de(n) {
 function pe(n) {
   return Array.isArray(n) ? [] : {};
 }
-function B(n, t) {
+function R(n, t) {
   return t.clone !== !1 && t.isMergeableObject(n) ? U(pe(n), n, t) : n;
 }
-function me(n, t, e) {
-  return n.concat(t).map(function(o) {
-    return B(o, e);
+function we(n, t, e) {
+  return n.concat(t).map(function(a) {
+    return R(a, e);
   });
 }
-function we(n, t) {
+function me(n, t) {
   if (!t.customMerge)
     return U;
   var e = t.customMerge(n);
   return typeof e == "function" ? e : U;
 }
-function ge(n) {
+function be(n) {
   return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(n).filter(function(t) {
     return Object.propertyIsEnumerable.call(n, t);
   }) : [];
 }
 function X(n) {
-  return Object.keys(n).concat(ge(n));
+  return Object.keys(n).concat(be(n));
 }
-function re(n, t) {
+function se(n, t) {
   try {
     return t in n;
   } catch {
     return !1;
   }
 }
-function ye(n, t) {
-  return re(n, t) && !(Object.hasOwnProperty.call(n, t) && Object.propertyIsEnumerable.call(n, t));
+function ge(n, t) {
+  return se(n, t) && !(Object.hasOwnProperty.call(n, t) && Object.propertyIsEnumerable.call(n, t));
 }
-function be(n, t, e) {
-  var o = {};
-  return e.isMergeableObject(n) && X(n).forEach(function(r) {
-    o[r] = B(n[r], e);
-  }), X(t).forEach(function(r) {
-    ye(n, r) || (re(n, r) && e.isMergeableObject(t[r]) ? o[r] = we(r, e)(n[r], t[r], e) : o[r] = B(t[r], e));
-  }), o;
+function ye(n, t, e) {
+  var a = {};
+  return e.isMergeableObject(n) && X(n).forEach(function(l) {
+    a[l] = R(n[l], e);
+  }), X(t).forEach(function(l) {
+    ge(n, l) || (se(n, l) && e.isMergeableObject(t[l]) ? a[l] = me(l, e)(n[l], t[l], e) : a[l] = R(t[l], e));
+  }), a;
 }
 function U(n, t, e) {
-  e = e || {}, e.arrayMerge = e.arrayMerge || me, e.isMergeableObject = e.isMergeableObject || ae, e.cloneUnlessOtherwiseSpecified = B;
-  var o = Array.isArray(t), r = Array.isArray(n), f = o === r;
-  return f ? o ? e.arrayMerge(n, t, e) : be(n, t, e) : B(t, e);
+  e = e || {}, e.arrayMerge = e.arrayMerge || we, e.isMergeableObject = e.isMergeableObject || ae, e.cloneUnlessOtherwiseSpecified = R;
+  var a = Array.isArray(t), l = Array.isArray(n), g = a === l;
+  return g ? a ? e.arrayMerge(n, t, e) : ye(n, t, e) : R(t, e);
 }
 U.all = function(t, e) {
   if (!Array.isArray(t))
     throw new Error("first argument should be an array");
-  return t.reduce(function(o, r) {
-    return U(o, r, e);
+  return t.reduce(function(a, l) {
+    return U(a, l, e);
   }, {});
 };
 var ve = U, Oe = ve;
-const Ee = /* @__PURE__ */ ne(Oe);
+const Ae = /* @__PURE__ */ ne(Oe);
 /*!
  * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
  *
@@ -203,7 +203,7 @@ const Ee = /* @__PURE__ */ ne(Oe);
 function Z(n) {
   return Object.prototype.toString.call(n) === "[object Object]";
 }
-function Ae(n) {
+function Ee(n) {
   var t, e;
   return Z(n) === !1 ? !1 : (t = n.constructor, t === void 0 ? !0 : (e = t.prototype, !(Z(e) === !1 || e.hasOwnProperty("isPrototypeOf") === !1)));
 }
@@ -246,73 +246,75 @@ const Ce = '[data-elem="drawer.panel"]', F = "data-drawers-group", _e = [
   lockPageScroll: !0
 };
 function te(n) {
-  return Ee.all(n, {
-    isMergeableObject: Ae
+  return Ae.all(n, {
+    isMergeableObject: Ee
   });
 }
-var E, O, P, $;
+var A, O, P, B;
 class Y {
-  constructor({ target: t, type: e, owner: o }) {
-    g(this, E, void 0);
-    g(this, O, void 0);
-    g(this, P, void 0);
-    g(this, $, !1);
-    const r = Q(t);
-    if (!r)
+  constructor({ target: t, type: e, owner: a }) {
+    m(this, A, void 0);
+    m(this, O, void 0);
+    m(this, P, void 0);
+    m(this, B, !1);
+    const l = Q(t);
+    if (!l)
       throw new Error("Trigger element cannot be found");
-    b(this, E, r), b(this, O, o), b(this, P, e), this.init();
+    if (!a)
+      throw new Error("Owning drawer instance hasn't been provided");
+    v(this, A, l), v(this, O, a), v(this, P, e), this.init();
   }
   // Accessors
   get isActive() {
-    return s(this, $);
+    return r(this, B);
   }
   get owner() {
-    return s(this, O);
+    return r(this, O);
   }
   // Methods
   init() {
-    s(this, E).addEventListener("click", (t) => this.clickHandler(t)), s(this, O).on("open", () => this.setActive(!0)), s(this, O).on("close", () => this.setActive(!1));
+    r(this, A).addEventListener("click", (t) => this.clickHandler(t)), r(this, O).on("open", () => this.setActive(!0)), r(this, O).on("close", () => this.setActive(!1));
   }
   clickHandler(t) {
-    t.__drawerTrigger = this, s(this, P) === "open" ? s(this, O).isOpen || s(this, O).open(s(this, E)) : s(this, P) === "close" ? s(this, O).isOpen && s(this, O).close(s(this, E)) : s(this, O).isOpen ? s(this, O).close(s(this, E)) : s(this, O).open(s(this, E));
+    t.__drawerTrigger = this, r(this, P) === "open" ? r(this, O).isOpen || r(this, O).open(r(this, A)) : r(this, P) === "close" ? r(this, O).isOpen && r(this, O).close(r(this, A)) : r(this, O).isOpen ? r(this, O).close(r(this, A)) : r(this, O).open(r(this, A));
   }
   setActive(t) {
-    b(this, $, t), t ? s(this, E).classList.add("drawer-trigger_active") : s(this, E).classList.remove("drawer-trigger_active");
+    v(this, B, t), t ? r(this, A).classList.add("drawer-trigger_active") : r(this, A).classList.remove("drawer-trigger_active");
   }
 }
-E = new WeakMap(), O = new WeakMap(), P = new WeakMap(), $ = new WeakMap();
-var p, K, j, H, T;
+A = new WeakMap(), O = new WeakMap(), P = new WeakMap(), B = new WeakMap();
+var f, K, j, H, T;
 class Le extends le {
-  constructor({ target: e, options: o }) {
+  constructor({ target: e, options: a }) {
     super();
-    g(this, p, void 0);
-    g(this, K, void 0);
-    g(this, j, void 0);
-    g(this, H, void 0);
-    g(this, T, void 0);
-    this.handleDocumentClick = async (u) => {
-      var l;
-      if (((l = u.__drawerTrigger) == null ? void 0 : l.owner) === this)
+    m(this, f, void 0);
+    m(this, K, void 0);
+    m(this, j, void 0);
+    m(this, H, void 0);
+    m(this, T, void 0);
+    this.handleDocumentClick = async (s) => {
+      var c;
+      if (((c = s.__drawerTrigger) == null ? void 0 : c.owner) === this)
         return;
-      const h = u.target;
-      if (u.composedPath(), this.dom.panel.contains(h))
+      const o = s.target;
+      if (s.composedPath(), this.dom.panel.contains(o))
         return;
-      const i = h == null ? void 0 : h.closest("[data-drawer]");
-      i ? i.getAttribute("data-drawer") === s(this, T) ? this.handleUnderlayClick(u) : this.handleOtherDrawerClick(u) : this.handleOutsideClick(u);
-    }, this.handleKeydown = (u) => {
-      s(this, p).closeOnEsc && u.key === "Escape" && this.close();
+      const i = o == null ? void 0 : o.closest("[data-drawer]");
+      i ? i.getAttribute("data-drawer") === r(this, T) ? this.handleUnderlayClick(s) : this.handleOtherDrawerClick(s) : this.handleOutsideClick(s);
+    }, this.handleKeydown = (s) => {
+      r(this, f).closeOnEsc && s.key === "Escape" && this.close();
     };
-    const r = te(o ? [ee, o] : [ee]), f = Q(e);
-    if (f === null)
+    const l = te(a ? [ee, a] : [ee]), g = Q(e);
+    if (g === null)
       throw new Error("Drawer's root cannot be found");
-    b(this, T, f.getAttribute("data-drawer"));
-    const d = f.querySelector(Ce);
-    if (d === null)
-      throw new Error(`Drawer's panel cannot be found. Alias: ${s(this, T)}`);
+    v(this, T, g.getAttribute("data-drawer"));
+    const p = g.querySelector(Ce);
+    if (p === null)
+      throw new Error(`Drawer's panel cannot be found. Alias: ${r(this, T)}`);
     this.dom = {
-      root: f,
-      panel: d
-    }, this.setOptions(r), this.dom.panel.setAttribute("tabindex", "-1"), this.dom.root.classList.add("drawer_initialized");
+      root: g,
+      panel: p
+    }, this.setOptions(l), this.dom.panel.setAttribute("tabindex", "-1"), this.dom.root.classList.add("drawer_initialized");
   }
   addEventListeners() {
     this.dom.root.addEventListener("keydown", this.handleKeydown), document.addEventListener("click", this.handleDocumentClick);
@@ -322,40 +324,40 @@ class Le extends le {
   }
   // Accessors
   get isOpen() {
-    return s(this, j);
+    return r(this, j);
   }
   get isModal() {
-    return s(this, p).modal;
+    return r(this, f).modal;
   }
   set isModal(e) {
     this.dom.root.classList[e ? "add" : "remove"]("drawer_modal");
   }
   get willLockScroll() {
-    return s(this, p).lockPageScroll;
+    return r(this, f).lockPageScroll;
   }
   set zIndex(e) {
-    this.dom.root.style.setProperty("--z-index", String(e)), b(this, K, e);
+    this.dom.root.style.setProperty("--z-index", String(e)), v(this, K, e);
   }
   get zIndex() {
-    return s(this, K);
+    return r(this, K);
   }
   // Methods
   async open(e) {
-    await V(0), !s(this, j) && (this.emit("beforeOpen", { drawer: this, trigger: e }), b(this, j, !0), this.dom.root.classList.add(s(this, p).openingClass), this.emit("open", { drawer: this, trigger: e }), typeof s(this, p).openAnimationDuration == "number" && await V(s(this, p).openAnimationDuration), this.dom.root.classList.remove(s(this, p).openingClass), this.dom.root.classList.add(s(this, p).openClass), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
+    await V(0), !r(this, j) && (this.emit("beforeOpen", { drawer: this, trigger: e }), v(this, j, !0), this.dom.root.classList.add(r(this, f).openingClass), this.emit("open", { drawer: this, trigger: e }), typeof r(this, f).openAnimationDuration == "number" && await V(r(this, f).openAnimationDuration), this.dom.root.classList.remove(r(this, f).openingClass), this.dom.root.classList.add(r(this, f).openClass), this.emit("openAnimationEnd", { drawer: this, trigger: e }), this.focus(), this.addEventListeners());
   }
   async close(e) {
-    s(this, p).onCloseConfirm && !s(this, p).onCloseConfirm(this, e) || (this.emit("beforeClose", { drawer: this, trigger: e }), this.removeEventListeners(), b(this, j, !1), this.dom.root.classList.remove(s(this, p).openClass), this.dom.root.classList.add(s(this, p).closingClass), this.emit("close", { drawer: this, trigger: e }), typeof s(this, p).closeAnimationDuration == "number" && await V(s(this, p).closeAnimationDuration), this.dom.root.classList.remove(s(this, p).closingClass), this.emit("closeAnimationEnd", { drawer: this, trigger: e }));
+    r(this, f).onCloseConfirm && !r(this, f).onCloseConfirm(this, e) || (this.emit("beforeClose", { drawer: this, trigger: e }), this.removeEventListeners(), v(this, j, !1), this.dom.root.classList.remove(r(this, f).openClass), this.dom.root.classList.add(r(this, f).closingClass), this.emit("close", { drawer: this, trigger: e }), typeof r(this, f).closeAnimationDuration == "number" && await V(r(this, f).closeAnimationDuration), this.dom.root.classList.remove(r(this, f).closingClass), this.emit("closeAnimationEnd", { drawer: this, trigger: e }));
   }
   handleOtherDrawerClick(e) {
   }
   handleOutsideClick(e) {
-    s(this, p).closeOnOutsideClick && (typeof s(this, p).closeOnOutsideClick == "object" && s(this, p).closeOnOutsideClick.hasOwnProperty("checkTarget") ? s(this, p).closeOnOutsideClick.checkTarget(e.target) && this.close() : this.close());
+    r(this, f).closeOnOutsideClick && (typeof r(this, f).closeOnOutsideClick == "object" && r(this, f).closeOnOutsideClick.hasOwnProperty("checkTarget") ? r(this, f).closeOnOutsideClick.checkTarget(e.target) && this.close() : this.close());
   }
   handleUnderlayClick(e) {
-    s(this, p).closeOnOutsideClick && this.close();
+    r(this, f).closeOnOutsideClick && this.close();
   }
   focus() {
-    s(this, p).focusOnChild && this.focusChild() || this.focusSelf();
+    r(this, f).focusOnChild && this.focusChild() || this.focusSelf();
   }
   focusSelf() {
     this.dom.panel.focus();
@@ -365,126 +367,140 @@ class Le extends le {
     return e ? (e.focus(), !0) : !1;
   }
   setOptions(e) {
-    var o;
-    e.hasOwnProperty("modal") && ((o = s(this, p)) == null ? void 0 : o.modal) !== e.modal && (this.isModal = e.modal), b(this, p, s(this, p) ? te([s(this, p), e]) : e);
+    var a;
+    e.hasOwnProperty("modal") && ((a = r(this, f)) == null ? void 0 : a.modal) !== e.modal && (this.isModal = e.modal), v(this, f, r(this, f) ? te([r(this, f), e]) : e);
   }
   assignGroup(e) {
-    b(this, H, e);
+    v(this, H, e);
   }
 }
-p = new WeakMap(), K = new WeakMap(), j = new WeakMap(), H = new WeakMap(), T = new WeakMap();
+f = new WeakMap(), K = new WeakMap(), j = new WeakMap(), H = new WeakMap(), T = new WeakMap();
 var M;
 class ke {
   constructor() {
-    g(this, M, /* @__PURE__ */ new Map());
+    m(this, M, /* @__PURE__ */ new Map());
   }
   lock(t, e) {
-    s(this, M).has(t) || s(this, M).set(t, /* @__PURE__ */ new Set());
-    const o = s(this, M).get(t);
-    o.size === 0 && t.classList.add("scroll-lock-by-drawer"), o.add(e);
+    r(this, M).has(t) || r(this, M).set(t, /* @__PURE__ */ new Set());
+    const a = r(this, M).get(t);
+    a.size === 0 && t.classList.add("scroll-lock-by-drawer"), a.add(e);
   }
   unlock(t, e) {
-    const o = s(this, M).get(t);
-    o == null || o.delete(e), (!o || o.size === 0) && t.classList.remove("scroll-lock-by-drawer");
+    const a = r(this, M).get(t);
+    a == null || a.delete(e), (!a || a.size === 0) && t.classList.remove("scroll-lock-by-drawer");
   }
 }
 M = new WeakMap();
-var x, A, C, D, k;
-const q = class q {
+var x, E, C, D, k;
+const $ = class $ {
   constructor(t) {
-    g(this, x, void 0);
-    g(this, A, void 0);
-    g(this, C, void 0);
-    g(this, D, void 0);
-    g(this, k, void 0);
-    b(this, A, []), b(this, C, []), b(this, k, /* @__PURE__ */ new Map()), this.onBeforeOpen = ({ drawer: r, trigger: f }) => {
-      r.isModal ? (s(this, k).set(r, s(this, A).length), s(this, A).push(r), r.zIndex = s(this, C).length + s(this, A).length) : (s(this, k).set(r, s(this, C).length), s(this, C).push(r), r.zIndex = s(this, C).length, s(this, A).length > 0 && s(this, A).forEach((d, u) => d.zIndex = s(this, C).length + u + 1)), r.willLockScroll && this.lockScroll(r);
-    }, this.onCloseAnimationEnd = ({ drawer: r, trigger: f }) => {
-      const d = r.isModal ? s(this, A) : s(this, C);
-      for (delete d[s(this, k).get(r)]; d.length && !d.at(-1); )
-        d.pop();
-      s(this, k).delete(r), this.unlockScroll(r);
+    m(this, x, void 0);
+    m(this, E, void 0);
+    m(this, C, void 0);
+    m(this, D, void 0);
+    m(this, k, void 0);
+    v(this, E, []), v(this, C, []), v(this, k, /* @__PURE__ */ new Map()), this.onBeforeOpen = ({ drawer: l, trigger: g }) => {
+      l.isModal ? (r(this, k).set(l, r(this, E).length), r(this, E).push(l), l.zIndex = r(this, C).length + r(this, E).length) : (r(this, k).set(l, r(this, C).length), r(this, C).push(l), l.zIndex = r(this, C).length, r(this, E).length > 0 && r(this, E).forEach((p, s) => p.zIndex = r(this, C).length + s + 1)), l.willLockScroll && this.lockScroll(l);
+    }, this.onCloseAnimationEnd = ({ drawer: l, trigger: g }) => {
+      const p = l.isModal ? r(this, E) : r(this, C);
+      for (delete p[r(this, k).get(l)]; p.length && !p.at(-1); )
+        p.pop();
+      r(this, k).delete(l), this.unlockScroll(l);
     };
     const e = Q(t);
     if (e === null)
       throw new Error("Drawer's group root cannot be found");
-    b(this, x, e);
-    const o = s(this, x).closest("[data-scrollable], html") || s(this, x).matches("[data-scrollable], html") && s(this, x);
-    if (o === null)
+    v(this, x, e);
+    const a = r(this, x).closest("[data-scrollable], html") || r(this, x).matches("[data-scrollable], html") && r(this, x);
+    if (a === null)
       throw new Error("Scrollable container for group root cannot be found");
-    b(this, D, o);
+    v(this, D, a);
   }
   add(t) {
     t.on("beforeOpen", this.onBeforeOpen), t.on("closeAnimationEnd", this.onCloseAnimationEnd), t.assignGroup(this);
   }
   lockScroll(t) {
-    q.scrollLock.lock(s(this, D), t);
+    $.scrollLock.lock(r(this, D), t);
   }
   unlockScroll(t) {
-    q.scrollLock.unlock(s(this, D), t);
+    $.scrollLock.unlock(r(this, D), t);
   }
 };
-x = new WeakMap(), A = new WeakMap(), C = new WeakMap(), D = new WeakMap(), k = new WeakMap(), q.scrollLock = new ke();
-let G = q;
+x = new WeakMap(), E = new WeakMap(), C = new WeakMap(), D = new WeakMap(), k = new WeakMap(), $.scrollLock = new ke();
+let G = $;
 var I, z;
-const R = class R {
+const q = class q {
   constructor() {
-    g(this, I, /* @__PURE__ */ new Map());
-    g(this, z, /* @__PURE__ */ new Map());
-    if (R.instance)
-      return R.instance;
-    R.instance = this;
+    m(this, I, /* @__PURE__ */ new Map());
+    m(this, z, /* @__PURE__ */ new Map());
+    if (q.instance)
+      return q.instance;
+    q.instance = this;
   }
   init(t) {
-    document.querySelectorAll(`[${F}]`).forEach((f) => {
-      const d = f.getAttribute(F);
-      typeof d == "string" && s(this, z).set(d, new G(f));
-    }), s(this, z).set("default", new G(document.documentElement)), document.querySelectorAll("[data-drawer]").forEach((f) => {
-      var l;
-      const d = f.getAttribute("data-drawer");
-      if (typeof d != "string")
+    document.querySelectorAll(`[${F}]`).forEach((s) => {
+      const o = s.getAttribute(F);
+      typeof o == "string" && r(this, z).set(o, new G(s));
+    }), r(this, z).set("default", new G(document.documentElement)), document.querySelectorAll("[data-drawer]").forEach((s) => {
+      var b;
+      const o = s.getAttribute("data-drawer");
+      if (typeof o != "string")
         return;
-      const u = new Le({ target: f, options: t });
-      s(this, I).set(d, u);
-      const h = f.closest(`[${F}]`), i = h ? h.getAttribute(F) : "default";
-      if (typeof i != "string")
+      const i = new Le({ target: s, options: t });
+      r(this, I).set(o, i);
+      const c = s.closest(`[${F}]`), h = c ? c.getAttribute(F) : "default";
+      if (typeof h != "string")
         throw new Error("Group doesn't have alias set correctly");
-      (l = s(this, z).get(i)) == null || l.add(u);
-    }), document.querySelectorAll("[data-drawer-open], [data-drawer-close], [data-drawer-toggle]").forEach((f) => {
-      if (f.hasAttribute("data-drawer-open")) {
-        const d = f.getAttribute("data-drawer-open");
-        new Y({ target: f, type: "open", owner: this.get(d) });
-      } else if (f.hasAttribute("data-drawer-close")) {
-        const d = f.getAttribute("data-drawer-close");
-        new Y({ target: f, type: "close", owner: this.get(d) });
+      (b = r(this, z).get(h)) == null || b.add(i);
+    }), document.querySelectorAll("[data-drawer-open], [data-drawer-close], [data-drawer-toggle]").forEach((s) => {
+      if (s.hasAttribute("data-drawer-open")) {
+        const o = s.getAttribute("data-drawer-open");
+        g(s, o);
+        const i = this.get(o);
+        p(s, i, o), new Y({ target: s, type: "open", owner: i });
+      } else if (s.hasAttribute("data-drawer-close")) {
+        const o = s.getAttribute("data-drawer-close");
+        g(s, o);
+        const i = this.get(o);
+        p(s, i, o), new Y({ target: s, type: "close", owner: i });
       } else {
-        const d = f.getAttribute("data-drawer-toggle");
-        new Y({ target: f, type: "toggle", owner: this.get(d) });
+        const o = s.getAttribute("data-drawer-toggle");
+        g(s, o);
+        const i = this.get(o);
+        p(s, i, o), new Y({ target: s, type: "toggle", owner: i });
       }
     });
+    function g(s, o) {
+      if (!o)
+        throw new Error(`Drawer alias should be specified in the trigger attribute. Trigger elem: ${s}`);
+    }
+    function p(s, o, i) {
+      if (!o)
+        throw new Error(`Drawer hadn't been found for the trigger elem: ${s}. Alias: ${i}`);
+    }
   }
-  open(t, { trigger: e, options: o } = {}) {
-    var r;
-    (r = this.get(t)) == null || r.open(e);
+  open(t, { trigger: e, options: a } = {}) {
+    var l;
+    (l = this.get(t)) == null || l.open(e);
   }
-  close(t, { trigger: e, options: o } = {}) {
-    var r;
-    (r = this.get(t)) == null || r.close(e);
+  close(t, { trigger: e, options: a } = {}) {
+    var l;
+    (l = this.get(t)) == null || l.close(e);
   }
   get(t) {
-    return typeof t == "string" && s(this, I).get(t) || null;
+    return typeof t == "string" && r(this, I).get(t) || null;
   }
-  on(t, e, o) {
-    var r;
+  on(t, e, a) {
+    var l;
     if (t)
-      (r = this.get(t)) == null || r.on(e, o);
+      (l = this.get(t)) == null || l.on(e, a);
     else
-      for (const [f, d] of s(this, I))
-        d.on(e, o);
+      for (const [g, p] of r(this, I))
+        p.on(e, a);
   }
 };
 I = new WeakMap(), z = new WeakMap();
-let J = R;
+let J = q;
 typeof window < "u" && (window.hasOwnProperty("app") || (window.app = {}), window.app.drawers = new J());
 export {
   Le as Drawer,

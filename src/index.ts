@@ -57,6 +57,7 @@ export class Trigger {
 	constructor({ target, type, owner }: { target: TTarget, type: TTriggerType, owner: Drawer }) {
 		const root = getTargetElem(target);
 		if (!root) throw new Error("Trigger element cannot be found");
+		if (!owner) throw new Error("Owning drawer instance hasn't been provided");
 		this.#root = root;
 		this.#owner = owner;
 		this.#type = type;
@@ -333,16 +334,31 @@ export default class DrawersComposite {
 		const triggerElems = document.querySelectorAll(`[data-drawer-open], [data-drawer-close], [data-drawer-toggle]`);
 		triggerElems.forEach(triggerElem => {
 			if (triggerElem.hasAttribute("data-drawer-open")) {
-				const drawerAlias = triggerElem.getAttribute("data-drawer-open")!;
-				new Trigger({ target: triggerElem, type: "open", owner: this.get(drawerAlias)! });
+				const drawerAlias = triggerElem.getAttribute("data-drawer-open");
+				checkAlias(triggerElem, drawerAlias);
+				const drawer = this.get(drawerAlias);
+				checkDrawer(triggerElem, drawer, drawerAlias);
+				new Trigger({ target: triggerElem, type: "open", owner: drawer! });
 			} else if (triggerElem.hasAttribute("data-drawer-close")) {
-				const drawerAlias = triggerElem.getAttribute("data-drawer-close")!;
-				new Trigger({ target: triggerElem, type: "close", owner: this.get(drawerAlias)! });
+				const drawerAlias = triggerElem.getAttribute("data-drawer-close");
+				checkAlias(triggerElem, drawerAlias);
+				const drawer = this.get(drawerAlias);
+				checkDrawer(triggerElem, drawer, drawerAlias);
+				new Trigger({ target: triggerElem, type: "close", owner: drawer! });
 			} else {
-				const drawerAlias = triggerElem.getAttribute("data-drawer-toggle")!;
-				new Trigger({ target: triggerElem, type: "toggle", owner: this.get(drawerAlias)! });
+				const drawerAlias = triggerElem.getAttribute("data-drawer-toggle");
+				checkAlias(triggerElem, drawerAlias);
+				const drawer = this.get(drawerAlias);
+				checkDrawer(triggerElem, drawer, drawerAlias);
+				new Trigger({ target: triggerElem, type: "toggle", owner: drawer! });
 			}
 		});
+		function checkAlias(triggerElem: Element, alias?: string | null) {
+			if (!alias) throw new Error(`Drawer alias should be specified in the trigger attribute. Trigger elem: ${triggerElem}`);
+		}
+		function checkDrawer(triggerElem: Element, drawer?: Drawer | null, alias?: string | null) {
+			if (!drawer) throw new Error(`Drawer hadn't been found for the trigger elem: ${triggerElem}. Alias: ${alias}`);
+		}
 	}
 	open(alias: string, { trigger, options }: { trigger?: HTMLElement, options?: TDrawerOptions } = {}) {
 		this.get(alias)?.open(trigger);
