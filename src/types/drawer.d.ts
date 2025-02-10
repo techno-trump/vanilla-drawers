@@ -22,6 +22,9 @@ export type TDrawerOptions = {
 	openAnimationDuration: number;
 	closeAnimationDuration: number;
 	lockPageScroll: boolean;
+	lockScroll: {
+		unlockDelay: number;
+	};
 };
 export type TCompositeOptions = {
 	initialZIndex: number;

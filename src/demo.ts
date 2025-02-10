@@ -10,7 +10,6 @@ function init(_) {
 		lockPageScroll: false,
 	})
 	window.app.drawers.get("example-5").setOptions({
-		modal: false,
 		closeOnOutsideClick: false,
 	})
 	document.querySelector("#custom-trigger")?.addEventListener("click", () => {

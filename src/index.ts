@@ -43,6 +43,9 @@ const defaultOptions: TDrawerOptions = {
 	openAnimationDuration: 0,
 	closeAnimationDuration: 0,
 	lockPageScroll: true,
+	lockScroll: {
+		unlockDelay: 300,
+	}
 };
 function mergeOptions(optionsSet: TDrawerOptions[]) {
 		return merge.all(optionsSet, {
@@ -123,6 +126,9 @@ export class Drawer extends EventEmmiter {
 	removeEventListeners() {
 		this.dom.root.removeEventListener("keydown", this.handleKeydown);
 		document.removeEventListener("click", this.handleDocumentClick);
+	}
+	get scrollUnlockDelay() {
+		return this.#vars.lockScroll?.unlockDelay || 0;
 	}
 	// Accessors
 	get isOpen() {
@@ -234,9 +240,14 @@ export class Drawer extends EventEmmiter {
 	}
 }
 class ScrollLock {
+	#timeoutId: number | null = null;
 	#holders: Map<HTMLElement, Set<Drawer>> = new Map();
 	constructor() {}
 	lock(container: HTMLElement, drawer: Drawer) {
+		if (this.#timeoutId !== null) {
+			clearTimeout(this.#timeoutId);
+			this.#timeoutId = null;
+		}
 		if (!this.#holders.has(container)) {
 			this.#holders.set(container, new Set());
 		}
@@ -247,7 +258,9 @@ class ScrollLock {
 	unlock(container: HTMLElement, drawer: Drawer) {
 		const holders = this.#holders.get(container);
 		holders?.delete(drawer);
-		if (!holders || holders.size === 0) container.classList.remove("scroll-lock-by-drawer");
+		if (!holders || holders.size === 0) {
+			this.#timeoutId = setTimeout(() => container.classList.remove("scroll-lock-by-drawer"), drawer.scrollUnlockDelay);
+		}
 	}
 }
 export class DrawersGroup {
@@ -311,7 +324,7 @@ export default class DrawersComposite {
 		if (DrawersComposite.instance) return DrawersComposite.instance;
 		DrawersComposite.instance = this;
 	}
-	init(options?: TDrawerOptions) {
+	init(options: TDrawerOptions = defaultOptions) {
 		const groupElems = document.querySelectorAll(`[${GROUP_ATTR}]`);
 		groupElems.forEach(groupElem => {
 			const groupAlias = groupElem.getAttribute(GROUP_ATTR);
@@ -323,7 +336,7 @@ export default class DrawersComposite {
 		drawerElems.forEach(drawerElem => {
 			const drawerAlias = drawerElem.getAttribute("data-drawer");
 			if (typeof drawerAlias !== "string") return;
-			const drawer = new Drawer({ target: drawerElem, options });
+			const drawer = new Drawer({ target: drawerElem, options: { ...options, modal: drawerElem.matches(`[data-modal]`) ? drawerElem.matches(`:not([data-modal="false"]`) : options.modal } });
 			this.#drawersIndex.set(drawerAlias, drawer);
 
 			const groupElem = drawerElem.closest(`[${GROUP_ATTR}]`);
@@ -357,7 +370,7 @@ export default class DrawersComposite {
 			if (!alias) throw new Error(`Drawer alias should be specified in the trigger attribute. Trigger elem: ${triggerElem}`);
 		}
 		function checkDrawer(triggerElem: Element, drawer?: Drawer | null, alias?: string | null) {
-			if (!drawer) throw new Error(`Drawer hadn't been found for the trigger elem: ${triggerElem}. Alias: ${alias}`);
+			if (!drawer) throw new Error(`Drawer hasn't been found for the trigger elem: ${triggerElem}. Alias: ${alias}`);
 		}
 	}
 	open(alias: string, { trigger, options }: { trigger?: HTMLElement, options?: TDrawerOptions } = {}) {
